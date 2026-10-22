@@ -1,43 +1,123 @@
-# Astro Starter Kit: Minimal
+# Confluence 2026
 
-```sh
-npm create astro@latest -- --template minimal
+The official website for Confluence, an IEEE Computer Society PESU hackathon. The site introduces the event, presents its challenge tracks and roadmap, answers common questions, and accepts team registrations.
+
+## Built with
+
+- [Astro](https://astro.build/) for pages and the registration API
+- [Tailwind CSS](https://tailwindcss.com/) for styling
+- [MongoDB Atlas](https://www.mongodb.com/atlas) for registration data
+- [Vercel](https://vercel.com/) for deployment
+
+## Requirements
+
+- Node.js 22.12.0 or later
+- npm
+- A MongoDB Atlas database for registration submissions
+
+## Run the site locally
+
+From the project root, install dependencies:
+
+```bash
+npm install
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Create a local environment file by copying the example. In PowerShell:
 
-## 🚀 Project Structure
+```powershell
+Copy-Item .env.example .env
+```
 
-Inside of your Astro project, you'll see the following folders and files:
+In macOS/Linux shells, use:
+
+```bash
+cp .env.example .env
+```
+
+Open `.env` and set the MongoDB connection details:
+
+```env
+MONGODB_URI=your_mongodb_connection_string
+MONGODB_DB=confluence
+```
+
+Keep the real `.env` file private. It is ignored by Git. Never put the MongoDB URI in frontend code or a variable prefixed with `PUBLIC_`.
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Astro prints the local URL in the terminal, usually <http://localhost:4321>.
+
+## Build and preview
+
+Create a production build:
+
+```bash
+npm run build
+```
+
+Preview the build locally:
+
+```bash
+npm run preview
+```
+
+## Event website sections
+
+- **Home:** event introduction, background video, and countdown timer
+- **About:** event overview, venue, schedule, and prize pool
+- **Tracks:** seven challenge areas with descriptions and idea prompts
+- **Roadmap:** event checkpoints and expandable mission briefs
+- **FAQs:** common participant questions
+- **Registration:** a form for teams of three or four students, including each member's SRN
+
+The website currently lists the event date as October 25, 2026. Confirm event information and agenda details with the organisers before publishing updates.
+
+## Registration data
+
+The registration form sends data to the Astro endpoint at `/api/register`. The endpoint validates the submitted fields and stores accepted registrations in the `registrations` collection in the configured MongoDB database.
+
+For local registration submissions, `.env` must contain valid MongoDB settings and the Atlas network access rules must allow the connection. See [MONGODB-SETUP.md](MONGODB-SETUP.md) for Atlas setup and instructions for viewing submitted registrations.
+
+## Deploy to Vercel
+
+1. Push the project to GitHub and import that repository into Vercel.
+2. In Vercel, open **Project Settings → Environment Variables**.
+3. Add `MONGODB_URI` and `MONGODB_DB` for the environments you will deploy (Preview and Production).
+4. Check MongoDB Atlas network access and database-user permissions as described in [MONGODB-SETUP.md](MONGODB-SETUP.md).
+5. Deploy or redeploy the project.
+
+Do not commit `.env` or share the MongoDB connection string. `.env.example` contains only placeholders and is safe to commit.
+
+## Project structure
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+├── components/
+│   ├── FAQS.astro
+│   ├── Footer.astro
+│   ├── Navbar.astro
+│   ├── Roadmap.astro
+│   ├── Timer.astro
+│   └── Tracks.astro
+├── pages/
+│   ├── api/
+│   │   └── register.ts
+│   ├── index.astro
+│   └── register.astro
+└── styles/
+    └── global.css
+public/                 # Logo, icons, video, and footer artwork
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## npm scripts
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the local development server |
+| `npm run build` | Build the site for deployment |
+| `npm run preview` | Preview the production build locally |
