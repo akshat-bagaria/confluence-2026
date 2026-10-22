@@ -1,0 +1,347 @@
+---
+const themes = [
+  {
+    title: "When and where is the hackathon?",
+    description:
+      "October 25th 2026, 13th Floor BE Block, PES University RR Campus",
+  },
+  {
+    title: "Is there a registration fee?",
+    description:
+      "Selected Teams will have to pay a registration fee of ₹200 per member",
+  },
+  {
+    title: "What should I bring?",
+    description:
+      "You'll need to bring your own laptop, chargers, any external hard drives or hardware you plan to use, and most importantly - your enthusiasm and creative spirit! No hardware will be provided from IEEE CS PESU's side. While we encourage you to bring snacks and beverages to keep your energy up, please note that our venue has a strict no-tolerance policy for drugs, alcohol, cigarettes (including e-cigarettes), lighters, or any harmful substances. Anyone found in possession of these items will face immediate disciplinary action. Consider bringing a small cushion or sweater to stay comfortable.",
+  },
+  {
+    title:
+      "Do I need a team, and how many people can be on it?",
+    description:
+      "Yes, this is a team event. A team may consist of 3-4 members.",
+  },
+  {
+    title: "Do I need any prerequisites or special skills?",
+    description:
+      "None! While experience in coding and programming is a huge plus, your idea will carry you through the hackathon. Your final product can be built using any language and any open-source APIs.",
+  },
+  {
+    title: "Why should I participate in this hackathon?",
+    description:
+      "This hackathon will give you exposure, teach you about new tech stack and will help you network and connect with peers. You will be given the chance to build résumé-worthy projects and interact with industry experts. Not to mention the eye-catching cash prize.",
+  },
+  {
+    title: "Is the event open to everyone?",
+    description:
+      "Absolutely! Students of all branches and years are welcome to participate.",
+  },
+  {
+    title: "How many rounds are there?",
+    description:
+      "There will be a preliminary round where participants submit their ideas. The top 40 teams will be invited to build a working model on the day of the hackathon.",
+  },
+  {
+    title: "Have more questions?",
+    description:
+      "Message us on Instagram at @ieee.cs.pesu and our team will get back to you.",
+  },
+];
+
+const railThemes = [...themes, ...themes];
+const reverseRailThemes = [...themes].reverse();
+const reverseRailLoop = [...reverseRailThemes, ...reverseRailThemes];
+---
+
+<section
+  id="faqs"
+  data-faqs={JSON.stringify(themes)}
+  class="themes-section relative isolate overflow-hidden bg-[#06110d] px-5 py-24 sm:px-8 lg:px-12"
+>
+  <div
+    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.13),transparent_58%)]"
+  >
+  </div>
+
+  <header class="mx-auto mb-12 max-w-2xl text-center">
+    <p class="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-300">ANY QUERIES</p>
+    <h2 class="mt-3 text-4xl font-bold tracking-tight text-white sm:text-6xl">
+      FAQs
+    </h2>
+    <p
+      class="mx-auto mt-4 max-w-xl text-sm leading-6 text-gray-300 sm:text-base"
+    >
+      Looking for answers ?
+    </p>
+  </header>
+
+  <div
+    class="mx-auto grid max-w-7xl items-center gap-8 xl:grid-cols-[minmax(210px,1fr)_minmax(420px,1.5fr)_minmax(210px,1fr)]"
+  >
+    <!-- Mobile picker: stays still and wraps so every theme remains easy to select. -->
+    <nav
+      class="flex flex-wrap justify-center gap-2 xl:hidden"
+      aria-label="Choose a frequently asked question"
+    >
+      {
+        themes.map((theme, index) => (
+          <button
+            type="button"
+            class="theme-chip"
+            data-theme-index={index}
+            aria-pressed={index === 0}
+          >
+            <span class="mr-2 text-emerald-300">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            {theme.title}
+          </button>
+        ))
+      }
+    </nav>
+
+    <!-- Opposing vertical theme streams on wide screens. -->
+    <aside
+      class="theme-rail hidden xl:block"
+      aria-label="Questions, moving upward"
+    >
+      <div class="theme-marquee">
+        {
+          railThemes.map((theme, index) => {
+            const themeIndex = index % themes.length;
+            return (
+              <button
+                type="button"
+                class="theme-chip theme-rail-chip"
+                data-theme-index={themeIndex}
+                aria-pressed={themeIndex === 0}
+              >
+                <span class="block text-xs font-semibold tracking-widest text-emerald-300">
+                  {String(themeIndex + 1).padStart(2, "0")}
+                </span>
+                <span class="mt-2 block">{theme.title}</span>
+              </button>
+            );
+          })
+        }
+      </div>
+    </aside>
+
+    <article class="theme-feature" aria-live="polite" aria-atomic="true">
+      <div class="flex items-center justify-between gap-4">
+        <!-- <span class="theme-kicker">Featured challenge</span> -->
+        <span class="theme-index"
+          ><span data-active-number>01</span><span class="text-emerald-900">
+            / {String(themes.length).padStart(2, "0")}</span
+          ></span
+        >
+      </div>
+      <h3
+        class="mt-7 text-3xl font-bold leading-tight text-white sm:text-4xl"
+        data-active-title
+      >
+        {themes[0].title}
+      </h3>
+      <p class="mt-5 leading-7 text-gray-300" data-active-description>
+        {themes[0].description}
+      </p>
+      
+      <p class="mt-8 text-xs text-gray-500">
+        Select any question around the panel to read its answer.
+      </p>
+    </article>
+
+    <aside
+      class="theme-rail hidden xl:block"
+      aria-label="Questions, moving downward"
+    >
+      <div class="theme-marquee theme-marquee-reverse">
+        {
+          reverseRailLoop.map((theme, index) => {
+            const themeIndex = themes.findIndex(
+              (item) => item.title === theme.title,
+            );
+            return (
+              <button
+                type="button"
+                class="theme-chip theme-rail-chip"
+                data-theme-index={themeIndex}
+                aria-pressed={themeIndex === 0}
+              >
+                <span class="block text-xs font-semibold tracking-widest text-emerald-300">
+                  {String(themeIndex + 1).padStart(2, "0")}
+                </span>
+                <span class="mt-2 block">{theme.title}</span>
+              </button>
+            );
+          })
+        }
+      </div>
+    </aside>
+  </div>
+
+  <p class="mt-10 text-center text-xs text-gray-500">
+    Still have a question? Message us on Instagram @ieee.cs.pesu.
+  </p>
+</section>
+
+<script>
+  const section = document.querySelector<HTMLElement>("#faqs");
+
+  if (section) {
+    const themeData = JSON.parse(section.dataset.faqs ?? "[]") as Array<{
+      title: string;
+      description: string;
+    }>;
+
+    section.addEventListener("click", (event) => {
+      const button = (event.target as HTMLElement).closest<HTMLButtonElement>(
+        "button[data-theme-index]",
+      );
+      if (!button || !section.contains(button)) return;
+
+      const index = Number(button.dataset.themeIndex);
+      const theme = themeData[index];
+      if (!theme) return;
+
+      const title = section.querySelector<HTMLElement>("[data-active-title]");
+      const description = section.querySelector<HTMLElement>(
+        "[data-active-description]",
+      );
+      const number = section.querySelector<HTMLElement>("[data-active-number]");
+      
+
+      if (title) title.textContent = theme.title;
+      if (description) description.textContent = theme.description;
+      if (number) number.textContent = String(index + 1).padStart(2, "0");
+      
+
+      section
+        .querySelectorAll<HTMLButtonElement>("button[data-theme-index]")
+        .forEach((chip) => {
+          const active = Number(chip.dataset.themeIndex) === index;
+          chip.setAttribute("aria-pressed", String(active));
+          chip.classList.toggle("is-active", active);
+        });
+    });
+  }
+</script>
+
+<style>
+  .theme-rail {
+    position: relative;
+    height: 34rem;
+    overflow: hidden;
+    mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      #000 12%,
+      #000 88%,
+      transparent
+    );
+  }
+
+  .theme-marquee {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    animation: theme-scroll 48s linear infinite;
+  }
+
+  .theme-marquee-reverse {
+    animation-direction: reverse;
+    animation-duration: 56s;
+  }
+  .theme-rail:hover .theme-marquee,
+  .theme-rail:focus-within .theme-marquee {
+    animation-play-state: paused;
+  }
+
+  @keyframes theme-scroll {
+    to {
+      transform: translateY(-50%);
+    }
+  }
+
+  .theme-chip {
+    max-width: 100%;
+    min-height: 2.75rem;
+    padding: 0.7rem 0.9rem;
+    overflow-wrap: anywhere;
+    line-height: 1.35;
+    border: 1px solid rgb(52 211 153 / 0.22);
+    border-radius: 0.9rem;
+    background: rgb(6 28 21 / 0.84);
+    color: #d1fae5;
+    text-align: left;
+    transition:
+      border-color 200ms ease,
+      background 200ms ease,
+      box-shadow 200ms ease,
+      transform 200ms ease;
+    cursor: pointer;
+  }
+
+  .theme-chip:hover,
+  .theme-chip:focus-visible,
+  .theme-chip.is-active {
+    border-color: rgb(110 231 183 / 0.82);
+    background: rgb(8 48 34 / 0.96);
+    box-shadow: 0 0 24px rgb(16 185 129 / 0.16);
+    outline: none;
+  }
+
+  .theme-chip:focus-visible {
+    outline: 2px solid #6ee7b7;
+    outline-offset: 3px;
+  }
+  .theme-rail-chip {
+    width: 100%;
+    min-height: 6.5rem;
+    padding: 1rem;
+  }
+
+  .theme-feature {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgb(52 211 153 / 0.5);
+    border-radius: 1.5rem;
+    background: linear-gradient(
+      145deg,
+      rgb(8 35 26 / 0.96),
+      rgb(3 15 12 / 0.98)
+    );
+    padding: clamp(1.5rem, 4vw, 3rem);
+    box-shadow:
+      0 0 50px rgb(16 185 129 / 0.1),
+      inset 0 1px rgb(167 243 208 / 0.08);
+  }
+
+  .theme-kicker {
+    color: #6ee7b7;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .theme-index {
+    color: #d1fae5;
+    font-family: ui-monospace, monospace;
+    font-size: 0.8rem;
+  }
+  .theme-example {
+    border-left: 2px solid rgb(52 211 153 / 0.6);
+    padding: 0.2rem 0 0.2rem 0.8rem;
+    color: #d1d5db;
+    font-size: 0.9rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .theme-marquee {
+      animation: none;
+    }
+    .theme-chip {
+      transition: none;
+    }
+  }
+</style>

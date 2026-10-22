@@ -1,0 +1,246 @@
+---
+export const prerender = true;
+import "../styles/global.css";
+import Navbar from "../components/Navbar.astro";
+import Timer from "../components/Timer.astro";
+// import TopTeams from "../components/TopTeams.astro";
+import Tracks from "../components/Tracks.astro";
+import FAQs from "../components/FAQS.astro";
+import Footer from "../components/Footer.astro";
+import Roadmap from "../components/Roadmap.astro";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="theme-color" content="#06110d" />
+		<title>Confluence 2026 | National Level Hackathon</title>
+		<meta
+			name="description"
+			content="Confluence 2026 — a national level hackathon presented by IEEE CS PESU."
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Russo One&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+
+	<body class="min-h-screen bg-[#06110d] text-white">
+		<Navbar />
+
+		<main>
+			<section
+				id="home"
+				class="relative isolate flex min-h-screen items-center overflow-hidden bg-[#06110d] px-6 py-28 sm:px-10 lg:px-16"
+			>
+				<video
+					class="absolute inset-0 -z-20 h-full w-full object-cover brightness-75 saturate-90"
+					autoplay
+					muted
+					loop
+					playsinline
+					aria-hidden="true"
+				>
+					<source src="/videos/intro.mp4" type="video/mp4" />
+				</video>
+
+				<div
+					class="absolute inset-0 -z-10 bg-gradient-to-r from-[#06110d]/95 via-[#06110d]/65 to-emerald-950/25"
+				>
+				</div>
+				<div
+					class="absolute inset-0 -z-10 bg-gradient-to-t from-[#06110d] via-transparent to-[#06110d]/30"
+				>
+				</div>
+
+				<div class="mx-auto w-full max-w-7xl">
+					<div class="max-w-3xl">
+						<p
+							class="mb-5 text-xs font-semibold uppercase tracking-[0.32em] text-emerald-300 sm:text-sm"
+						>
+							IEEE CS PESU presents
+						</p>
+
+						<h1
+							class="text-4xl font-black tracking-tight text-white sm:text-7xl lg:text-8xl"
+						>
+							CONFLUENCE
+						</h1>
+
+						<p
+							class="mt-5 text-lg font-semibold uppercase tracking-[0.18em] text-lime-300 sm:text-xl"
+						>
+							National Level Hackathon
+						</p>
+						<Timer />
+						<p
+							class="mt-6 max-w-2xl text-base leading-7 text-gray-200 sm:text-lg"
+						>
+							24 hours to imagine, build, and bring ideas to life.
+							Join us to create technology that can make a
+							difference.
+						</p>
+
+						<div class="mt-9 flex flex-wrap gap-4">
+							<a
+								href="/#tracks"
+								class="rounded-md bg-lime-400 px-6 py-3 text-sm font-bold text-[#06110d] transition hover:bg-lime-300"
+							>
+								Explore Tracks
+							</a>
+							<a
+								href="#about"
+								class="rounded-md border border-emerald-300/60 bg-[#06110d]/40 px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition hover:border-emerald-200 hover:bg-emerald-950/60"
+							>
+								Discover Confluence
+							</a>
+						</div>
+
+						<p class="mt-8 text-sm text-gray-300">
+							October 25, 2026
+							<span class="mx-2 text-emerald-400">•</span>
+							PES University, RR Campus
+						</p>
+					</div>
+				</div>
+
+				<div
+					class="absolute bottom-8 left-1/2 hidden -translate-x-1/2 text-xs uppercase tracking-[0.25em] text-emerald-100/70 sm:block"
+				>
+					Scroll to explore
+				</div>
+			</section>
+
+			<section
+				id="about"
+				data-reveal
+				class="bg-[#06110d] px-6 py-20 sm:px-10 lg:px-16 mx-4 my-10 rounded-2xl border border-emerald-400/35
+shadow-[0_0_28px_rgba(52,211,153,0.18)]"
+			>
+				<div
+					class="mx-auto grid max-w-7xl gap-8 md:grid-cols-2 md:items-center"
+				>
+					<div>
+						<p
+							class="text-sm font-semibold uppercase tracking-[0.28em] text-emerald-400"
+						>
+							About the event
+						</p>
+						<h2
+						class="mt-4 text-2xl font-bold text-white sm:text-5xl"
+						>
+							Ideas into impact.
+						</h2>
+					</div>
+					<div class="">
+						<p class="max-w-2xl text-base leading-7 text-gray-300">
+							Confluence is IEEE CS PESU's 24-hour hackathon, and
+							it's built for anyone who loves turning an idea into
+							something real. Bring a team, bring your wildest
+							ideas, and spend a full day and night solving
+							problems that actually matter. Don't worry if you've
+							never done this before. Curiosity counts for just as
+							much as experience here. We'll pick teams based on
+							their problem statements, so don't play it safe.
+							Surprise us. When the 24 hours are up, you'll deploy
+							your app and show it off to our judges.
+						</p>
+					</div>
+				</div>
+				<div class="mt-20 grid grid-cols-1 gap-6 md:grid-cols-3">
+					<div
+						class="rounded-xl border border-emerald-400/40 bg-emerald-950/30 p-6 shadow-[0_0_20px_rgba(52,211,153,0.12)]"
+					>
+						<h3 class="text-2xl font-bold text-white">
+							When and Where?
+						</h3>
+						<p class="mt-6 text-gray-300">
+							Date — October 25, 2026
+						</p>
+						<p class="mt-2 text-gray-300">
+							Venue — 13th Floor BE Block, PES University, RR
+							Campus
+						</p>
+						<p class="mt-2 text-gray-300">
+							Time — 8:30 AM to 6:30 PM
+						</p>
+					</div>
+
+					<div
+						class="rounded-xl border border-emerald-400/40 bg-emerald-950/30 p-6 shadow-[0_0_20px_rgba(52,211,153,0.12)]"
+					>
+						<h3 class="text-2xl font-bold text-white">
+							Solve Real-World Problems
+						</h3>
+						<p class="mt-6 text-gray-300">
+							The tracks are curated to help solve real-world
+							problems.
+						</p>
+					</div>
+
+					<div
+						class="rounded-xl border border-emerald-400/40 bg-emerald-950/30 p-6 shadow-[0_0_20px_rgba(52,211,153,0.12)]"
+					>
+						<h3 class="text-2xl font-bold text-white">
+							Prize Pool
+						</h3>
+						<p class="mt-6 text-2xl font-semibold text-lime-300">
+							₹30,000
+						</p>
+					</div>
+				</div>
+			</section>
+			<!-- <TopTeams /> -->
+			<Tracks />
+			<Roadmap/>
+			<FAQs />
+			<Footer/>
+			
+		</main>
+		<button id="back-to-top" class="back-to-top" type="button" aria-label="Back to top" title="Back to top">
+			<svg viewBox="0 0 24 24" aria-hidden="true" class="h-6 w-6 fill-none stroke-current" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+				<path d="m6 14 6-6 6 6" />
+			</svg>
+		</button>
+		<script>
+			// Apply the same reveal behavior to every top-level page section and footer.
+			const revealTargets = document.querySelectorAll("main > section, main > footer");
+			if ("IntersectionObserver" in window) {
+				const revealObserver = new IntersectionObserver(
+					(entries) => {
+						entries.forEach((entry) => {
+							entry.target.classList.toggle("is-visible", entry.isIntersecting);
+						});
+					},
+					{ threshold: 0.12 },
+				);
+				revealTargets.forEach((element) => {
+					element.setAttribute("data-reveal", "");
+					revealObserver.observe(element);
+				});
+			} else {
+				revealTargets.forEach((element) => element.classList.add("is-visible"));
+			}
+
+			const backToTop = document.querySelector<HTMLButtonElement>("#back-to-top");
+			const updateBackToTop = () => {
+				backToTop?.classList.toggle("is-visible", window.scrollY > 120);
+			};
+
+			updateBackToTop();
+			window.addEventListener("scroll", updateBackToTop, { passive: true });
+			backToTop?.addEventListener("click", () => {
+				const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+					? "auto"
+					: "smooth";
+				window.scrollTo({ top: 0, behavior });
+			});
+		</script>
+	</body>
+</html>
+
+

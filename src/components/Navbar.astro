@@ -1,0 +1,116 @@
+---
+import "../styles/global.css";
+const links = [
+  { href: "/#home", label: "Home" },
+  { href: "/#about", label: "About" },
+  { href: "/#tracks", label: "Tracks" },
+  { href: "/#roadmap", label: "Roadmap" },
+  { href: "/#faqs", label: "FAQs" },
+  // {href: "/#top40teams" , label: "Top 40 Teams"}
+];
+
+---
+
+<style>
+  #site-header {
+    border-bottom: 1px solid transparent;
+    transition:
+      background-color 0.7s ease,
+      border-color 0.7s ease;
+  }
+
+  #site-header.is-sticky {
+    position: fixed;
+    background-color: rgb(0 0 0 / 0.55);
+    backdrop-filter: blur(12px);
+    border-bottom-color: rgb(255 255 255 / 0.1);
+    animation: slide-down 0.7s ease-out;
+  }
+
+  @keyframes slide-down {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #site-header.is-sticky {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  const header = document.getElementById("site-header");
+  const THRESHOLD = 200; // scroll distance in px before the navbar becomes sticky
+
+  function updateHeader() {
+    header?.classList.toggle("is-sticky", window.scrollY > THRESHOLD);
+  }
+
+  window.addEventListener("scroll", updateHeader, { passive: true });
+  updateHeader(); // handles the case where the page loads already scrolled
+
+  document.querySelectorAll<HTMLDetailsElement>("#site-header details").forEach((menu) => {
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        menu.open = false;
+      });
+    });
+  });
+</script>
+<header id="site-header" class="absolute inset-x-0 top-0 z-50 w-full">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <a href="/#home" class="flex shrink-0 items-center" aria-label="IEEE Computer Society PESU home">
+      <img
+        src="/ieee-cs-pesu.png"
+        alt="IEEE Computer Society PESU Student Branch Chapter"
+        class="h-11 w-auto object-contain sm:h-14"
+      />
+    </a>
+    <ul class="hidden items-center gap-8 md:flex">
+      {
+        links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="text-sm text-gray-300 transition-all duration-200 hover:text-emerald-400 hover:[text-shadow:0_0_10px_#34d399]"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+      <li>
+        <a
+          href="/register"
+          class="rounded-lg border border-lime-200/80 bg-[#c7ff00] px-4 py-2 text-sm font-black tracking-wide text-[#07130a] shadow-[0_0_20px_rgba(199,255,0,0.28)] transition duration-200 hover:-translate-y-0.5 hover:bg-[#d9ff52] hover:shadow-[0_0_32px_rgba(199,255,0,0.5)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-200"
+        >
+          Register Now
+        </a>
+      </li>
+    </ul>
+    <details class="relative md:hidden">
+      <summary class="min-h-11 cursor-pointer list-none rounded-lg border border-emerald-300/40 bg-[#06110d]/80 px-4 py-3 text-sm font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-300">
+        Menu <span aria-hidden="true" class="ml-1 text-emerald-300">☰</span>
+      </summary>
+      <ul class="absolute right-0 mt-3 flex min-w-48 flex-col gap-1 rounded-xl border border-emerald-300/20 bg-[#06110d]/95 p-3 shadow-xl backdrop-blur">
+        {links.map((link) => (
+          <li><a href={link.href} class="block min-h-11 rounded-lg px-3 py-3 text-sm text-gray-200 hover:bg-emerald-900/50 hover:text-emerald-200">{link.label}</a></li>
+        ))}
+        <li><a href="/register" class="mt-1 flex min-h-11 items-center justify-center rounded-lg bg-[#c7ff00] px-3 py-2 text-center text-sm font-bold text-[#07130a]">Register Now</a></li>
+      </ul>
+    </details>
+  </nav>
+</header>
+
+
+
+
+
+

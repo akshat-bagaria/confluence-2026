@@ -1,0 +1,219 @@
+---
+// Add the final times to the middle milestones when the event agenda is ready.
+const milestones = [
+  {
+    time: "08:30 AM",
+    label: "01 / START",
+    title: "Kickoff",
+    description: "Arrive, get settled, and hear the event briefing before the day begins.",
+    icon: "↗",
+  },
+  {
+    time: "DURING THE EVENT",
+    label: "02 / BUILD",
+    title: "Build & collaborate",
+    description: "Work with your team, explore your chosen problem, and turn your idea into a working solution.",
+    icon: "⌘",
+  },
+  {
+    time: "DURING THE EVENT",
+    label: "03 / SHOWCASE",
+    title: "Project showcase",
+    description: "Share what you built and explain how your solution makes an impact.",
+    icon: "✳",
+  },
+  {
+    time: "06:30 PM",
+    label: "04 / FINISH",
+    title: "Closing",
+    description: "Wrap up the day and celebrate the ideas and teams that made it happen.",
+    icon: "⌁",
+  },
+];
+---
+
+<section id="roadmap" class="roadmap-section relative isolate overflow-hidden bg-[#06110d] px-5 py-24 sm:px-8 lg:px-12">
+  <div class="roadmap-glow" aria-hidden="true"></div>
+
+  <div class="relative mx-auto max-w-7xl">
+    <header class="mx-auto mb-16 max-w-2xl text-center">
+      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300 sm:tracking-[0.3em]">Confluence · October 25, 2026</p>
+      <h2 class="mt-3 text-3xl font-bold tracking-tight text-white sm:text-6xl">The day, in motion.</h2>
+      <p class="mx-auto mt-4 max-w-xl text-sm leading-6 text-gray-300 sm:text-base">
+        Follow the idea from kickoff to final showcase. Select a checkpoint to open its mission brief.
+      </p>
+    </header>
+
+    <div class="roadmap-meta mx-auto mb-14 flex w-fit max-w-full flex-wrap items-center justify-center gap-2 rounded-2xl px-3 py-2 sm:flex-nowrap sm:gap-3 sm:rounded-full sm:px-4">
+      <span class="roadmap-live-dot" aria-hidden="true"></span>
+      <span class="font-mono text-xs tracking-wider text-emerald-100">08:30 AM</span>
+      <span class="text-emerald-700" aria-hidden="true">──────</span>
+      <span class="font-mono text-xs tracking-wider text-emerald-100">06:30 PM</span>
+      <span class="ml-1 text-[10px] uppercase tracking-[0.16em] text-emerald-400">Event window</span>
+    </div>
+
+    <ol class="roadmap-track">
+      {milestones.map((step, index) => (
+        <li class="roadmap-stop">
+          <span class="roadmap-node" aria-hidden="true">
+            <span>{step.icon}</span>
+          </span>
+
+          <details class="roadmap-card" open={index === 0}>
+            <summary>
+              <span class="roadmap-step-label">{step.label}</span>
+              <span class="roadmap-card-title">{step.title}</span>
+              <span class="roadmap-card-bottom">
+                <span class="roadmap-time">{step.time}</span>
+                <span class="roadmap-toggle" aria-hidden="true">+</span>
+              </span>
+            </summary>
+            <div class="roadmap-brief">
+              <p>{step.description}</p>
+            </div>
+          </details>
+        </li>
+      ))}
+    </ol>
+
+    <p class="mt-10 text-center text-xs text-gray-500">
+      Middle checkpoint times can be filled in once the detailed event agenda is confirmed.
+    </p>
+  </div>
+</section>
+
+<style>
+  .roadmap-section { color: #ecfdf5; }
+  .roadmap-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 45%, rgb(16 185 129 / 0.12), transparent 58%);
+    pointer-events: none;
+  }
+
+  .roadmap-meta {
+    border: 1px solid rgb(110 231 183 / 0.22);
+    background: rgb(3 20 14 / 0.72);
+    box-shadow: 0 0 32px rgb(16 185 129 / 0.08);
+  }
+
+  .roadmap-live-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: #6ee7b7;
+    box-shadow: 0 0 12px #34d399;
+  }
+
+  .roadmap-track {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: minmax(15rem, 1fr) 4.5rem minmax(15rem, 1fr);
+    gap: 0 1.25rem;
+    max-width: 72rem;
+    margin-inline: auto;
+  }
+
+  .roadmap-track::before {
+    position: absolute;
+    top: calc(50% - 1px);
+    right: 8%;
+    left: 8%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgb(52 211 153 / 0.7) 8%, rgb(52 211 153 / 0.38) 92%, transparent);
+    box-shadow: 0 0 15px rgb(16 185 129 / 0.35);
+    content: "";
+  }
+
+  .roadmap-stop { display: contents; }
+
+  .roadmap-node {
+    z-index: 1;
+    display: grid;
+    grid-column: var(--step-column);
+    grid-row: 2;
+    width: 3.5rem;
+    height: 3.5rem;
+    place-items: center;
+    align-self: center;
+    justify-self: center;
+    border: 1px solid rgb(110 231 183 / 0.72);
+    border-radius: 9999px;
+    background: #062319;
+    color: #a7f3d0;
+    font-size: 1.4rem;
+    box-shadow: 0 0 0 7px rgb(6 17 13 / 0.92), 0 0 24px rgb(16 185 129 / 0.34);
+    transition: color 200ms ease, background 200ms ease, transform 200ms ease;
+  }
+
+  .roadmap-stop:nth-child(1) .roadmap-node { --step-column: 1; }
+  .roadmap-stop:nth-child(2) .roadmap-node { --step-column: 2; }
+  .roadmap-stop:nth-child(3) .roadmap-node { --step-column: 3; }
+  .roadmap-stop:nth-child(4) .roadmap-node { --step-column: 4; }
+
+  .roadmap-card {
+    z-index: 2;
+    grid-column: var(--step-column);
+    width: 100%;
+    align-self: end;
+    margin-bottom: 1.4rem;
+    overflow: hidden;
+    border: 1px solid rgb(52 211 153 / 0.28);
+    border-radius: 1.1rem;
+    background: linear-gradient(145deg, rgb(8 35 26 / 0.96), rgb(3 15 12 / 0.97));
+    box-shadow: 0 16px 40px rgb(0 0 0 / 0.2);
+    transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+  }
+
+  .roadmap-stop:nth-child(1) .roadmap-card { --step-column: 1; grid-row: 1; }
+  .roadmap-stop:nth-child(2) .roadmap-card { --step-column: 2; grid-row: 3; align-self: start; margin: 1.4rem 0 0; }
+  .roadmap-stop:nth-child(3) .roadmap-card { --step-column: 3; grid-row: 1; }
+  .roadmap-stop:nth-child(4) .roadmap-card { --step-column: 4; grid-row: 3; align-self: start; margin: 1.4rem 0 0; }
+
+  .roadmap-card:hover, .roadmap-card[open] {
+    border-color: rgb(110 231 183 / 0.66);
+    box-shadow: 0 16px 44px rgb(0 0 0 / 0.28), 0 0 26px rgb(16 185 129 / 0.12);
+  }
+
+  .roadmap-card summary {
+    display: flex;
+    min-height: 11rem;
+    flex-direction: column;
+    cursor: pointer;
+    list-style: none;
+    padding: 1.2rem;
+  }
+
+  .roadmap-card summary::-webkit-details-marker { display: none; }
+  .roadmap-card summary::marker { content: ""; }
+  .roadmap-step-label { color: #6ee7b7; font-family: ui-monospace, monospace; font-size: 0.65rem; letter-spacing: 0.15em; }
+  .roadmap-card-title { margin-top: 1.25rem; color: #fff; font-size: 1.2rem; font-weight: 700; line-height: 1.2; }
+  .roadmap-card-bottom { display: flex; align-items: center; justify-content: space-between; gap: 0.4rem; margin-top: auto; padding-top: 1.25rem; }
+  .roadmap-time { color: #a7f3d0; font-family: ui-monospace, monospace; font-size: 0.65rem; line-height: 1.4; }
+  .roadmap-toggle { display: grid; width: 1.5rem; height: 1.5rem; flex: none; place-items: center; border: 1px solid rgb(110 231 183 / 0.35); border-radius: 50%; color: #a7f3d0; transition: transform 200ms ease; }
+  .roadmap-card[open] .roadmap-toggle { transform: rotate(45deg); }
+  .roadmap-brief { border-top: 1px solid rgb(110 231 183 / 0.15); padding: 0 1.2rem 1.2rem; color: #d1d5db; font-size: 0.8rem; line-height: 1.6; animation: brief-in 180ms ease both; }
+
+  @keyframes brief-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 1023px) {
+    .roadmap-meta { row-gap: 0.35rem; }
+    .roadmap-meta > span:nth-child(3) { letter-spacing: -0.12em; }
+    .roadmap-track { grid-template-columns: 2.8rem minmax(0, 1fr); grid-template-rows: none; gap: 1rem 0.75rem; }
+    .roadmap-track::before { top: 1.5rem; right: auto; bottom: 1.5rem; left: 1.65rem; width: 1px; height: auto; background: linear-gradient(180deg, rgb(52 211 153 / 0.72), rgb(52 211 153 / 0.2)); }
+    .roadmap-stop { display: contents; }
+    .roadmap-node { grid-column: 1 !important; grid-row: auto; width: 2.8rem; height: 2.8rem; justify-self: start; font-size: 1.1rem; }
+    .roadmap-card,
+    .roadmap-stop:nth-child(n) .roadmap-card { grid-column: 2; grid-row: auto; align-self: center; margin: 0; }
+    .roadmap-card summary { min-height: 8.5rem; padding: 1rem; }
+    .roadmap-card-title { margin-top: 0.8rem; font-size: 1.05rem; }
+    .roadmap-card-bottom { padding-top: 0.8rem; }
+    .roadmap-brief { padding: 0 1rem 1rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .roadmap-node, .roadmap-card, .roadmap-toggle { transition: none; }
+    .roadmap-brief { animation: none; }
+  }
+</style>

@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+body {
+  font-family: "Russo One", sans-serif;
+}
+.hero-video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  #home video {
+    display: none;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+
+.back-to-top {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 50;
+  display: grid;
+  width: 3.25rem;
+  height: 3.25rem;
+  place-items: center;
+  border: 1px solid rgb(167 243 208 / 0.5);
+  border-radius: 9999px;
+  background: #10b981;
+  color: #03110c;
+  box-shadow: 0 0 24px rgb(16 185 129 / 0.32);
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.75rem);
+  transition: opacity 250ms ease, transform 250ms ease, visibility 250ms ease, background 180ms ease;
+  cursor: pointer;
+}
+
+.back-to-top.is-visible {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.back-to-top.is-visible:hover {
+  transform: translateY(-2px);
+  background: #6ee7b7;
+}
+
+.back-to-top:focus-visible {
+  outline: 2px solid #a7f3d0;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top {
+    transition: none;
+  }
+}

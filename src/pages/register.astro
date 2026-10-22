@@ -1,0 +1,436 @@
+---
+export const prerender = true;
+import "../styles/global.css";
+import Navbar from "../components/Navbar.astro";
+
+const tracks = [
+    "LOSSLESS",
+    "Autopsy",
+    "Featherlight",
+    "Need-To-Know-Basis",
+    "Resurrections",
+    "Hands-off",
+    "CrossBreed",
+];
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="theme-color" content="#06110d" />
+        <title>Register | Confluence</title>
+        <meta
+            name="description"
+            content="Register your team for Confluence, the IEEE CS PESU hackathon."
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body class="min-h-screen bg-[#06110d] text-white">
+        <Navbar />
+        <main
+            class="relative isolate min-h-screen overflow-hidden px-5 pb-20 pt-32 sm:px-8 sm:pt-36"
+        >
+            <div
+                aria-hidden="true"
+                class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_50%_10%,rgba(16,185,129,0.2),transparent_55%)]"
+            >
+            </div>
+            <div class="mx-auto max-w-5xl">
+                <header class="mb-10 text-center">
+                    <p
+                        class="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-300"
+                    >
+                        October 25 · PES University, RR Campus
+                    </p>
+                    <h1
+                        class="mt-4 text-3xl font-black tracking-tight text-white sm:text-6xl"
+                    >
+                        Build your team.
+                    </h1>
+                    <p class="mx-auto mt-4 max-w-2xl leading-7 text-gray-300">
+                        Register one team of 3–4 students. Add your team lead
+                        and every teammate, then share the challenge you want to
+                        take on.
+                    </p>
+                </header>
+
+                <form
+                    id="registration-form"
+                    method="POST"
+                    class="rounded-2xl border border-emerald-400/35 bg-[#071812]/90 p-5 shadow-[0_0_45px_rgba(16,185,129,0.12)] backdrop-blur sm:p-9"
+                >
+                    <div class="grid gap-6 sm:grid-cols-2">
+                        <label class="field sm:col-span-2"
+                            >Team name <span>*</span><input
+                                name="teamName"
+                                required
+                                maxlength="80"
+                                placeholder="e.g. Green Circuit"
+                            /></label
+                        >
+                        <label class="field"
+                            >College / institution <span>*</span><input
+                                name="college"
+                                required
+                                maxlength="120"
+                                placeholder="Your institution"
+                            /></label
+                        >
+                        <label class="field"
+                            >Team lead name <span>*</span><input
+                                name="leadName"
+                                required
+                                maxlength="100"
+                                autocomplete="name"
+                                placeholder="Full name"
+                            /></label
+                        >
+                        <label class="field"
+                            >Team lead SRN <span>*</span><input
+                                name="leadSRN"
+                                type="text"
+                                required
+                                maxlength="13"
+                                minlength="13"
+                                pattern="PES1UG[0-9]{2}[A-Z]{2}[0-9]{3}"
+                                title="Use the format PES1UG26CS098, with uppercase letters."
+                                autocapitalize="characters"
+                                autocomplete="off"
+                                data-srn
+                                placeholder="PES1UG26CS098"
+                            /></label
+                        >
+                        <label class="field"
+                            >Team lead email <span>*</span><input
+                                name="leadEmail"
+                                type="email"
+                                required
+                                maxlength="160"
+                                autocomplete="email"
+                                placeholder="you@example.com"
+                            /></label
+                        >
+                        <label class="field"
+                            >Team lead phone <span>*</span><input
+                                name="leadPhone"
+                                type="tel"
+                                required
+                                maxlength="20"
+                                pattern="\+?[0-9][0-9\s()\-]{7,18}"
+                                title="Enter at least 8 digits; +country code is allowed."
+                                placeholder="+91 98765 43210"
+                            /></label
+                        >
+                    </div>
+
+                    <fieldset class="mt-10">
+                        <legend class="text-xl font-bold text-white"
+                            >Team members <span
+                                class="text-sm font-normal text-gray-400"
+                                >(3–4 people, including the lead)</span
+                            ></legend
+                        >
+                        <p class="mb-5 mt-2 text-sm text-gray-400">
+                            The team lead above is Member 1. Add the other two
+                            required members and an optional fourth.
+                        </p>
+                        <div class="grid gap-6 sm:grid-cols-2">
+                            <label class="field"
+                                >Member 2 name <span>*</span><input
+                                    name="member2"
+                                    required
+                                    maxlength="100"
+                                    placeholder="Full name"
+                                /></label
+                            >
+                            <label class="field"
+                                >Member 2 SRN <span>*</span><input
+                                    name="member2SRN"
+                                    type="text"
+                                    required
+                                    maxlength="13"
+                                    minlength="13"
+                                    pattern="PES1UG[0-9]{2}[A-Z]{2}[0-9]{3}"
+                                    title="Use the format PES1UG26CS098, with uppercase letters."
+                                    autocapitalize="characters"
+                                    autocomplete="off"
+                                    data-srn
+                                    placeholder="PES1UG26CS098"
+                                /></label
+                            >
+                            <label class="field"
+                                >Member 3 name <span>*</span><input
+                                    name="member3"
+                                    required
+                                    maxlength="100"
+                                    placeholder="Full name"
+                                /></label
+                            >
+                            <label class="field"
+                                >Member 3 SRN <span>*</span><input
+                                    name="member3SRN"
+                                    type="text"
+                                    required
+                                    maxlength="13"
+                                    minlength="13"
+                                    pattern="PES1UG[0-9]{2}[A-Z]{2}[0-9]{3}"
+                                    title="Use the format PES1UG26CS098, with uppercase letters."
+                                    autocapitalize="characters"
+                                    autocomplete="off"
+                                    data-srn
+                                    placeholder="PES1UG26CS098"
+                                /></label
+                            >
+                            <label class="field"
+                                >Member 4 name <span class="optional"
+                                    >(optional)</span
+                                ><input
+                                    name="member4"
+                                    id="member4-name"
+                                    maxlength="100"
+                                    placeholder="Leave blank for a 3-person team"
+                                /></label
+                            >
+                            <label class="field"
+                                >Member 4 SRN <span class="optional">(required if you add Member 4)</span><input
+                                    name="member4SRN"
+                                    id="member4-srn"
+                                    type="text"
+                                    maxlength="13"
+                                    minlength="13"
+                                    pattern="PES1UG[0-9]{2}[A-Z]{2}[0-9]{3}"
+                                    title="Use the format PES1UG26CS098, with uppercase letters."
+                                    autocapitalize="characters"
+                                    autocomplete="off"
+                                    data-srn
+                                    placeholder="PES1UG26CS098"
+                                /></label
+                            >
+                        </div>
+                    </fieldset>
+
+                    <div class="mt-10 grid gap-6">
+                        <label class="field"
+                            >Primary track <span>*</span>
+                            <select name="theme" required>
+                                <option value="" disabled selected
+                                    >Select a track</option
+                                >
+                                {
+                                    tracks.map((track) => (
+                                        <option value={track}>{track}</option>
+                                    ))
+                                }
+                            </select>
+                        </label>
+                        <label class="field"
+                            >Problem statement / idea <span>*</span>
+                            <textarea
+                                name="idea"
+                                required
+                                minlength="30"
+                                maxlength="2000"
+                                rows="5"
+                                placeholder="What problem will your team solve, and who will benefit? (30–2,000 characters)"
+                            ></textarea>
+                        </label>
+                    </div>
+
+                    <div class="honeypot" aria-hidden="true">
+                        <label
+                            >Leave empty<input
+                                name="website"
+                                tabindex="-1"
+                                autocomplete="off"
+                            /></label>
+                    </div>
+                    <label
+                        class="mt-7 flex cursor-pointer items-start gap-3 text-sm leading-6 text-gray-300"
+                    >
+                        <input
+                            class="mt-1 size-4 accent-lime-400"
+                            type="checkbox"
+                            name="consent"
+                            value="yes"
+                            required
+                        />
+                        <span
+                            >I confirm these details are accurate and that the
+                            listed members agree to this registration. The
+                            organisers may contact the team lead. <span
+                                class="text-lime-300">*</span
+                            ></span
+                        >
+                    </label>
+
+                    <div
+                        class="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between"
+                    >
+                        <button
+                            type="submit"
+                            class="rounded-lg bg-[#c7ff00] px-7 py-3.5 text-sm font-black tracking-wide text-[#07130a] shadow-[0_0_22px_rgba(199,255,0,0.25)] transition hover:-translate-y-0.5 hover:bg-[#d9ff52] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-200 disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none"
+                        >
+                            Submit team registration <span aria-hidden="true"
+                                >↗</span
+                            >
+                        </button>
+                        <p
+                            id="registration-status"
+                            class="max-w-md text-sm leading-6 text-gray-400"
+                            role="status"
+                            aria-live="polite"
+                        >
+                            Your team details will be stored securely. The organisers will contact the team lead.
+
+                        </p>
+                    </div>
+                </form>
+                <section
+                    id="registration-success"
+                    hidden
+                    class="rounded-2xl border border-emerald-300/40 bg-[#071812]/95 p-6 text-center shadow-[0_0_45px_rgba(16,185,129,0.16)] sm:p-12"
+                    aria-live="polite"
+                >
+                    <p class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-300">Registration complete</p>
+                    <h2 class="mt-3 text-2xl font-bold text-white sm:text-3xl">Your team is on the list.</h2>
+                    <p class="mx-auto mt-4 max-w-xl leading-7 text-gray-300">Your registration was saved. The organisers will contact the team lead with next steps.</p>
+                    <a href="/" class="mt-7 inline-flex rounded-lg bg-[#c7ff00] px-6 py-3 font-bold text-[#07130a] transition hover:bg-[#d9ff52]">Back to Confluence</a>
+                </section>
+                <p class="mt-5 text-center text-xs text-gray-500">
+                    Your team’s details will be used to manage this event
+                    registration.
+                </p>
+            </div>
+        </main>
+    </body>
+</html>
+
+<style>
+    .field {
+        display: grid;
+        gap: 0.55rem;
+        color: #d1fae5;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+    .field > span {
+        color: #bef264;
+    }
+    .field > span.optional {
+        color: #9ca3af;
+        font-weight: 400;
+    }
+    .field input,
+    .field select,
+    .field textarea {
+        width: 100%;
+        border: 1px solid rgb(52 211 153 / 0.28);
+        border-radius: 0.65rem;
+        background: rgb(2 12 8 / 0.82);
+        padding: 0.85rem 1rem;
+        color: #f3f4f6;
+        font-size: 16px;
+        outline: none;
+        transition:
+            border-color 160ms ease,
+            box-shadow 160ms ease;
+    }
+    .field input::placeholder,
+    .field textarea::placeholder {
+        color: #6b7280;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+        border-color: #6ee7b7;
+        box-shadow: 0 0 0 3px rgb(16 185 129 / 0.16);
+    }
+    .field textarea {
+        resize: vertical;
+    }
+    .field select:invalid {
+        color: #6b7280;
+    }
+    .honeypot {
+        position: absolute;
+        left: -10000px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .field input,
+        .field select,
+        .field textarea {
+            transition: none;
+        }
+    }
+</style>
+
+<script>
+    const registrationForm = document.querySelector<HTMLFormElement>("#registration-form");
+    const srnInputs = Array.from(document.querySelectorAll<HTMLInputElement>("input[data-srn]"));
+    const member4Name = document.querySelector<HTMLInputElement>("#member4-name");
+    const member4Srn = document.querySelector<HTMLInputElement>("#member4-srn");
+    const formStatus = document.querySelector<HTMLElement>("#registration-status");
+    const successPanel = document.querySelector<HTMLElement>("#registration-success");
+    const submitButton = registrationForm?.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+    function validateSrns() {
+        const seen = new Set<string>();
+        if (member4Name && member4Srn) {
+            member4Name.required = Boolean(member4Srn.value.trim());
+            member4Srn.required = Boolean(member4Name.value.trim());
+        }
+        srnInputs.forEach((input) => {
+            input.value = input.value.replace(/\s+/g, "").toUpperCase();
+            const duplicate = input.value !== "" && seen.has(input.value);
+            input.setCustomValidity(duplicate ? "Each team member must have a different SRN." : "");
+            if (input.value) seen.add(input.value);
+        });
+    }
+
+    srnInputs.forEach((input) => input.addEventListener("input", validateSrns));
+    member4Name?.addEventListener("input", validateSrns);
+
+    registrationForm?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        validateSrns();
+        if (!registrationForm.reportValidity()) return;
+
+        if (submitButton) submitButton.disabled = true;
+        if (formStatus) formStatus.textContent = "Saving your registration securely…";
+
+        try {
+            const response = await fetch("/api/register", {
+                method: "POST",
+                body: new FormData(registrationForm),
+                headers: { Accept: "application/json" },
+            });
+            const result = await response.json().catch(() => ({})) as { message?: string };
+            if (!response.ok) {
+                throw new Error(result.message || "We couldn’t save the registration. Please check the form and try again.");
+            }
+
+            registrationForm.hidden = true;
+            if (successPanel) successPanel.hidden = false;
+            successPanel?.scrollIntoView({ behavior: "smooth", block: "center" });
+        } catch (error) {
+            if (formStatus) {
+                formStatus.textContent = error instanceof Error
+                    ? error.message
+                    : "We couldn’t reach the registration service. Check your connection and try again.";
+            }
+            if (submitButton) submitButton.disabled = false;
+        }
+    });
+
+    validateSrns();
+</script>

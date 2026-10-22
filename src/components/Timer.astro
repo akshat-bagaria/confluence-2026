@@ -1,0 +1,45 @@
+
+<script>
+  const eventDate = new Date("2026-10-25T08:30:00+05:30").getTime();
+
+  function updateTimer() {
+    const remaining = Math.max(0, eventDate - Date.now());
+    const units = {
+      days: Math.floor(remaining / 86_400_000),
+      hours: Math.floor((remaining % 86_400_000) / 3_600_000),
+      minutes: Math.floor((remaining % 3_600_000) / 60_000),
+      seconds: Math.floor((remaining % 60_000) / 1_000),
+    };
+
+    for (const [unit, value] of Object.entries(units)) {
+      const element = document.getElementById(`timer-${unit}`);
+      if (element) element.textContent = String(value).padStart(2, "0");
+    }
+  }
+
+  updateTimer();
+  setInterval(updateTimer, 1000);
+</script>
+
+
+<div class="mt-8">
+    <p class="mb-3 text-sm uppercase tracking-[0.25em] text-emerald-300">
+        Event starts in
+    </p>
+
+    <div class="flex w-full max-w-96 gap-2 text-center sm:gap-3">
+        {
+            ["days", "hours", "minutes", "seconds"].map((unit) => (
+                <div class="min-w-0 flex-1 rounded-lg border border-emerald-400/30 bg-black/40 px-2 py-3 backdrop-blur sm:min-w-16 sm:px-3">
+                    <span
+                        id={`timer-${unit}`}
+                        class="block text-xl font-bold text-lime-300 sm:text-2xl"
+                    >
+                        00
+                    </span>
+                    <span class="text-[0.65rem] uppercase text-gray-300 sm:text-xs">{unit}</span>
+                </div>
+            ))
+        }
+    </div>
+</div>
