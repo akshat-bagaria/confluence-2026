@@ -1,19 +1,25 @@
-
 <script>
   const eventDate = new Date("2026-10-25T08:30:00+05:30").getTime();
 
   function updateTimer() {
-    const remaining = Math.max(0, eventDate - Date.now());
+    const difference = Math.floor((eventDate - Date.now()) / 1000);
+    const sign = difference < 0 ? "-" : "";
+    const totalSeconds = Math.abs(difference);
     const units = {
-      days: Math.floor(remaining / 86_400_000),
-      hours: Math.floor((remaining % 86_400_000) / 3_600_000),
-      minutes: Math.floor((remaining % 3_600_000) / 60_000),
-      seconds: Math.floor((remaining % 60_000) / 1_000),
+      days: Math.floor(totalSeconds / 86_400),
+      hours: Math.floor((totalSeconds % 86_400) / 3_600),
+      minutes: Math.floor((totalSeconds % 3_600) / 60),
+      seconds: totalSeconds % 60,
     };
 
     for (const [unit, value] of Object.entries(units)) {
       const element = document.getElementById(`timer-${unit}`);
-      if (element) element.textContent = String(value).padStart(2, "0");
+      if (element) element.textContent = `${sign}${String(value).padStart(2, "0")}`;
+    }
+
+    const label = document.getElementById("timer-label");
+    if (label) {
+      label.textContent = difference < 0 ? "Time since event started" : "Event starts in";
     }
   }
 
@@ -21,9 +27,8 @@
   setInterval(updateTimer, 1000);
 </script>
 
-
 <div class="mt-8">
-    <p class="mb-3 text-sm uppercase tracking-[0.25em] text-emerald-300">
+    <p id="timer-label" class="mb-3 text-sm uppercase tracking-[0.25em] text-emerald-300">
         Event starts in
     </p>
 
